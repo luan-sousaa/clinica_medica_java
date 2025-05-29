@@ -1,5 +1,7 @@
+// Pacote onde a classe está inserida
 package br.com.clinica.lady;
 
+// Criação da classe "Paciente" e seus atributos
 public class Paciente {
     private int id_paciente;
     private String nome;
@@ -8,10 +10,12 @@ public class Paciente {
     private String endereco;
     private String data_nascimento;
 
+    // Método "get" utilizado para ler a variável
     public String getData_nascimento() {
         return data_nascimento;
     }
 
+    // Método "set" utilizado para alterar a variável
     public void setData_nascimento(String data_nascimento) {
         this.data_nascimento = data_nascimento;
     }
@@ -43,7 +47,8 @@ public class Paciente {
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
-
+    
+    // Construtor da classe criada, utilizado para inicializar os atributos
     public Paciente(String cpf, String data_nascimento, String endereco, int id_paciente, String nome, String sexo) {
         this.cpf = cpf;
         this.data_nascimento = data_nascimento;
@@ -52,7 +57,7 @@ public class Paciente {
         this.nome = nome;
         this.sexo = sexo;
     }
-
+    // Método da classe que printa as informações do paciente
     public void visualizar_paciente() {
         System.out.println("INFORMAÇÕES DO PACIENTE");
         System.out.println("Visualizando Nome do Paciente: " +nome);
