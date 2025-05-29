@@ -37,6 +37,12 @@ public class Medico {
         this.nome_medico = nome_medico;
     }
     public void Atender_paciente(){
+        System.out.println("INFORMAÇÕES DO MÉDICO");
         System.out.println("Atendendo paciente");
+        System.out.println("Nome do medico: " +nome_medico);
+        System.out.println("Especialidade do medico: " +especialidade);
+        System.out.println("Crm do medico: " +crm);
+        System.out.println("Id do medico: " +id_medico);
+        System.out.println("\n");
     }
 }

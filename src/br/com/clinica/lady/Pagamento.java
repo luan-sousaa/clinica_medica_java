@@ -1,27 +1,71 @@
 package br.com.clinica.lady;
 
-public class Pagamento {
+import br.com.clinica.lady.inteface_pag.Ipag;
+
+public class Pagamento implements Ipag {
+
     private int id_consulta;
     private int id_pagamento;
     private String metodoPagamento;
     private boolean status;
+    private double valor;
 
-    public Pagamento(int id_consulta, int id_pagamento, String metodoPagamento, boolean status) {
-        this.id_consulta = id_consulta;
-        this.id_pagamento = id_pagamento;
-        this.metodoPagamento = metodoPagamento;
-        this.status = status;
-        System.out.println("STATUS DO PAGAMENTO");
-        System.out.println("Pagamento status: " + status);
-        if (status == true) {
-            this.status = true;
-            System.out.println("Pagamento Valido");
-        }else{
-            this.status = false;
-            System.out.println("Pagamento Invalido");
+    @Override
+    public boolean consultar_status_pagamento(boolean status) {
+        System.out.println("Status do pagamento: " + status);
+        if (!status) {
+            System.out.println("Pagamento Pendente");
+        } else {
+            System.out.println("Pagamento Aprovado");
         }
-        System.out.println("\n");
+        return status;
     }
+
+    @Override
+    public String processar_pagamento(String metodoPagamento) {
+        try {
+            if (metodoPagamento == null || metodoPagamento.trim().isEmpty()) {
+                throw new IllegalArgumentException("Método de pagamento não pode ser vazio.");
+            }
+            this.metodoPagamento = metodoPagamento;
+            System.out.println("Método do pagamento: " + metodoPagamento);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro ao processar pagamento: " + e.getMessage());
+        }
+        return metodoPagamento;
+    }
+
+    @Override
+    public double pagar_consulta(double valor) {
+        try {
+            if (valor <= 0) {
+                throw new IllegalArgumentException("Valor da consulta deve ser maior que zero.");
+            }
+            this.valor = valor;
+            System.out.println("Valor da consulta: R$" + valor);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro ao pagar consulta: " + e.getMessage());
+        }
+        return valor;
+    }
+
+    public Pagamento(int id_consulta, int id_pagamento) {
+        try {
+            if (id_consulta <= 0 || id_pagamento <= 0) {
+                throw new IllegalArgumentException("IDs devem ser maiores que zero.");
+            }
+            this.id_consulta = id_consulta;
+            this.id_pagamento = id_pagamento;
+
+            System.out.println("INFORMAÇÕES DO PAGAMENTO");
+            System.out.println("ID PAGAMENTO: " + id_pagamento);
+            System.out.println("ID Consulta: " + id_consulta);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro na criação do pagamento: " + e.getMessage());
+        }
+    }
+
+    // Getters e Setters
 
     public int getId_consulta() {
         return id_consulta;
@@ -55,5 +99,11 @@ public class Pagamento {
         this.status = status;
     }
 
+    public double getValor() {
+        return valor;
+    }
 
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
 }
